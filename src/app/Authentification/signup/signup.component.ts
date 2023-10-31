@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, NgForm, NgModel, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { Auth } from './Auth.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthValidatorsService } from '../auth-validators.service';
-import { AuthGuard2Service } from '../auth-guard2.service';
 import { CoreService } from 'src/app/services/core.service';
 import { AuthService } from '../auth.service';
 
@@ -16,19 +14,19 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+
   // @ViewChild('f') signupForm! :NgForm;
   @ViewChild('Email') seeNgModel!:NgModel;
   emailFieldBlurred=true;
   signupForm!:FormGroup;
   passwordsMismatch:boolean=false;
   isEmpty:boolean=false;
-  constructor(private Http:HttpClient,
+  constructor(
               private fb:FormBuilder,
               private router:Router,
-              private authGuard:AuthGuard2Service,
               private authValidators:AuthValidatorsService,
               private _coreService:CoreService,
               private authService:AuthService
@@ -39,19 +37,13 @@ export class SignupComponent implements OnInit {
       fullName:['',[Validators.required,this.authValidators.validateFullName]],
       username:['',[Validators.required]],
       email:['',[Validators.required,Validators.email]],
+      role:[''],
       password:['',[Validators.required,Validators.minLength(6),this.authValidators.passwordValidator]],
       confirmPassword:['',[Validators.required,this.authValidators.passwordMatchValidator,this.authValidators.passwordValidator]] 
     })
 
     
   }
-
-  form: any = {
-    username: null,
-    email: null,
-    password: null
-  };
-  
 
   onSubmit(Data: Auth){
     console.log(Data);
@@ -71,8 +63,7 @@ export class SignupComponent implements OnInit {
     this.authService.register(formData).subscribe({
       next: (val: any) => {
         this._coreService.openSnackBar('Product successfully added!');
-        this.authGuard.login(formData);
-        this.router.navigate(['/dashboardpage'])  
+        this.router.navigate(['/login'])  
       },
       error: (err: any) => {
         console.error(err);

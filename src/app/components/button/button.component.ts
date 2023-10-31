@@ -12,10 +12,10 @@ export class ButtonComponent {
   @Input() apparence? : string ;
   @Input() prefixIcon! : string ;
   @Input() SuffixIcon! : string ;
-	@Input() color: string = '0068B4';
-	@Input() type: string = 'button';
-	@Output() btnClick = new EventEmitter();
-	@Input() isDisabled = false;
+  @Input() color: string = '0068B4';
+  @Input() type: string = 'button';
+  @Output() btnClick = new EventEmitter();
+  @Input() isDisabled = false;
 
 	constructor() {}
 

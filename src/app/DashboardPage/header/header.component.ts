@@ -1,9 +1,11 @@
 
 import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
 import { Languages, adminElements } from './header-dummy-data';
-import { FormControl } from '@angular/forms';
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { AuthGuard2Service } from 'src/app/Authentification/auth-guard2.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { AuthService } from 'src/app/Authentification/auth.service';
+import { EventBusService } from 'src/app/Authentification/shared/event-bus.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -11,6 +13,9 @@ import { AuthGuard2Service } from 'src/app/Authentification/auth-guard2.service'
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  eventBusSub?: Subscription;
+
+  constructor(private tokenStorage : TokenStorageService,private authService : AuthService,private eventBusService : EventBusService){}
   
   @Input() ScreenWidth!:number;
   @Input() collapsed!:boolean;
@@ -24,10 +29,12 @@ export class HeaderComponent implements OnInit {
   darkClassName='theme-dark';
   lightClassName='them-light';
   
-  constructor(private authGuard:AuthGuard2Service){}
-
   ngOnInit(): void {
       this.selectedLanguage=this.languages[0];
+
+      this.eventBusSub = this.eventBusService.on('logout', () => {
+        this.logout();
+      });
   }
 
   
@@ -70,8 +77,18 @@ export class HeaderComponent implements OnInit {
    return styleClass;
   }
 
-  onLogout(){
-    //  this.authGuard.logout();
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: res => {
+        console.log(res);
+        this.tokenStorage.signOut();
+
+        window.location.reload();
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
   
 }

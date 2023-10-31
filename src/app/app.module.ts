@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatTableModule } from '@angular/material/table';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -44,7 +44,6 @@ import { PagesComponent } from './DashboardPage/pages/pages.component';
 
 import { AuthValidatorsService } from './Authentification/auth-validators.service';
 import { AuthGuardService } from './Authentification/auth-guard.service';
-import { AuthGuard2Service } from './Authentification/auth-guard2.service';
 
 
 
@@ -60,6 +59,10 @@ import {
   CdkMenuItem,
   CdkMenuBar,
 } from '@angular/cdk/menu';
+import { AuthInterceptor, httpInterceptorProviders } from './Authentification/helper/auth.interceptor';
+import { Router } from '@angular/router';
+import { TokenStorageService } from './services/token-storage.service';
+import { EventBusService } from './Authentification/shared/event-bus.service';
 
 
 
@@ -125,9 +128,10 @@ import {
     FormsModule,
   ],
 
-  providers: [AuthValidatorsService,
-              AuthGuardService,
-              AuthGuard2Service],
+  providers: [  AuthValidatorsService,
+                AuthGuardService,
+                httpInterceptorProviders,
+              ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

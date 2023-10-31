@@ -6,18 +6,18 @@ import { AdminProfileComponent } from './DashboardPage/admin-profile/admin-profi
 import { LoginComponent } from './Authentification/login/login.component';
 import { DashboardPageComponent } from './DashboardPage/DashboardPage.component';
 import { SignupComponent } from './Authentification/signup/signup.component';
-import { AuthGuardService } from './Authentification/auth-guard.service';
 import { DashboardComponent } from './DashboardPage/dashboard/dashboard.component';
 import { ProductsComponent } from './DashboardPage/products/products.component';
 import { StatisticsComponent } from './DashboardPage/statistics/statistics.component';
 import { CoupensComponent } from './DashboardPage/coupens/coupens.component';
 import { MediaComponent } from './DashboardPage/media/media.component';
 import { PagesComponent } from './DashboardPage/pages/pages.component';
+import { authGuardGuard, loginGuard } from './services/auth-guard.guard';
 
 
 const routes: Routes = [
   {path:'',redirectTo:'dashboardpage',pathMatch:'full'},
-  {path:'dashboardpage',canActivate:[AuthGuardService],component:DashboardPageComponent,
+  {path:'dashboardpage',canActivate:[authGuardGuard],component:DashboardPageComponent,
   children:[
      {path:'',redirectTo:'dashboard',pathMatch:'full'},
      {path:'dashboard',component:DashboardComponent },
@@ -30,7 +30,7 @@ const routes: Routes = [
      {path:'profile',component:AdminProfileComponent},
     ] 
   },
-  {path:'login',component:LoginComponent},
+  {path:'login',canActivate:[loginGuard],component:LoginComponent},
   {path:'signup',component:SignupComponent},
   
 ];

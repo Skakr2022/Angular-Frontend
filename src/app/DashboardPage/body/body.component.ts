@@ -13,13 +13,13 @@ export class BodyComponent {
   
   getBodyClass():string{
     let styleClass='';
-    console.log('getBodyClass()'+this.collapsed);
+    
     if(this.collapsed && this.ScreenWidth>=768){
-      console.log('if getBodyClass()'+this.ScreenWidth);
+      
       styleClass='body-trimmed';
     }
     else if(this.collapsed && this.ScreenWidth<=768 && this.ScreenWidth >0){
-      console.log('else if getBodyClass()'+this.ScreenWidth);
+      
       styleClass='body-md-screen';
     }
     return styleClass;
