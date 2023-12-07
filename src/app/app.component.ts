@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenStorageService } from './services/token-storage.service';
 
 // interface sideNaveToggle {
 //   screenWidth: number;
@@ -12,12 +13,8 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  // isSideNavCollapsed=true;
-  // screenWidth=768;
-  // OnToggleSideNav(data:sideNaveToggle){
-  //   this.screenWidth=data.screenWidth;
-  //   console.log('OnToggleSideNav(data:sideNaveToggle)'+ this.screenWidth);
-  //   this.isSideNavCollapsed=data.collapsed;
-  // }
+  
+
+  constructor() { }
   
 }

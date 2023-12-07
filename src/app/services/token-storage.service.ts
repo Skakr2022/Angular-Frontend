@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
+export class TokenStorageService {
+
   private  USER_KEY = 'auth-user';
 
-  constructor() {}
+  constructor() { }
 
-  clean(): void {
+  signOut(): void {
     window.sessionStorage.clear();
   }
 
@@ -17,21 +18,21 @@ export class StorageService {
     window.sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 
+  public isLoggedIn(){
+    if(window.sessionStorage.getItem(this.USER_KEY) !== null){
+      return true
+    }
+    return false;
+
+  }
+
   public getUser(): any {
     const user = window.sessionStorage.getItem(this.USER_KEY);
     if (user) {
       return JSON.parse(user);
     }
-
     return {};
   }
 
-  public isLoggedIn(): boolean {
-    const user = window.sessionStorage.getItem(this.USER_KEY);
-    if (user) {
-      return true;
-    }
 
-    return false;
-  }
 }

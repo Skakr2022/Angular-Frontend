@@ -3,7 +3,6 @@ import { Product } from '../../common/Product';
 import { ProductCategory } from 'src/app/common/ProductCategory';
 import { ProductService } from 'src/app/services/product.service';
 import { CustomersService } from 'src/app/services/Customers.service';
-import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -31,15 +30,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   UsersNum=0;
+  
   constructor(public productService: ProductService,
               private matDialog: MatDialog,
               private  roleService:RoleService,
               private _liveAnnouncer: LiveAnnouncer,
               private _coreService: CoreService,
               private customersService:CustomersService) { }
-
-  
-
 
    /** Announce the change in sort state for assistive technology. */
    announceSortChange(sortState: Sort) {
@@ -54,9 +51,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
   }
 
-  
   ngOnInit() {
-      this.listCustomers();  
+      this.listCustomers(); 
+      console.log(this.listCustomers()) ;
       this.findUsersPage();  
       this.roleService.getRole().subscribe((data)=>{
         console.log(data);
@@ -110,42 +107,27 @@ export class UsersComponent implements OnInit, AfterViewInit {
     
     this.filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
+    console.log(this.dataSource);
   }
  
 
-  openDialogEdit(data:Product): void{
-    console.log(data);
-    const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = true;
+  // openDialogEdit(data:Product): void{
+  //   console.log(data);
+  //   const dialogConfig = new MatDialogConfig();
+  //   // The user can't close the dialog by clicking outside its body
+  //   dialogConfig.disableClose = true;
   
-    dialogConfig.width = "500px";
-    dialogConfig.data = {
-      name: "EditProduct",
-      title: "Update Product",
-      actionButtonText: "Edit",
-      product: data
-    }
-    const dialogRef = this.matDialog.open(DialogEditComponent,dialogConfig);
-    dialogRef.afterClosed().subscribe( result => {this.listCustomers();} )
-  }
+  //   dialogConfig.width = "500px";
+  //   dialogConfig.data = {
+  //     name: "EditProduct",
+  //     title: "Update Product",
+  //     actionButtonText: "Edit",
+  //     product: data
+  //   }
+  //   const dialogRef = this.matDialog.open(DialogEditComponent,dialogConfig);
+  //   dialogRef.afterClosed().subscribe( result => {this.listCustomers();} )
+  // }
 
 
-  openDialogCreate(): void{
-    
-    const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = true;
-    dialogConfig.width = "500px";
-    dialogConfig.data = {
-      name: "CreateProduct",
-      title: "Create Product",
-      actionButtonText: "Create",
-    }
   
-    const dialogRef = this.matDialog.open(DialogEditComponent,dialogConfig);
-    dialogRef.afterClosed().subscribe( result => {
-      this.listCustomers();
-    } )
-  }
 }

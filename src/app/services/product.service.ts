@@ -15,11 +15,11 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<any> {
-    return this.http.get<Product[]>(`http://localhost:8080/product/paginate`)
+    return this.http.get<Product[]>(`http://localhost:8080/product`)
   }
 
   createStudent(formData:FormData): Observable<object> {  
-    return this.http.post(`${this.productUrl}`+'/new', formData,{
+    return this.http.post(`${this.productUrl}`, formData,{
       responseType:'arraybuffer'
     } );  
   }  
@@ -59,7 +59,7 @@ export class ProductService {
       }).pipe( 
        map(res=> res) 
       );
- }
+    }
 
 
 }

@@ -6,6 +6,7 @@ import { Injectable } from "@angular/core";
 })
 
 export class SortingDataAccessorService {
+  
     sortingDataAccessor: ((data: any, sortHeaderId: any) => string | number) =
     (data: any, sortHeaderId: any): string | number => {
     //This represents the data that you want to sort. It's an object or an array

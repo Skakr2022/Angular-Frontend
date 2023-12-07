@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatTableModule } from '@angular/material/table';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { DataPropertyGetterPipe } from './components/table/data-property-getter.pipe/data-property-getter.pipe';
@@ -34,7 +34,6 @@ import { HeaderComponent } from './DashboardPage/header/header.component';
 import { ChatBoxComponent } from './DashboardPage/chat-box/chat-box.component';
 import { AdminProfileComponent } from './DashboardPage/admin-profile/admin-profile.component';
 import { DashboardPageComponent } from './DashboardPage/DashboardPage.component';
-import { DialogEditComponent } from './DashboardPage/dialog-edit/dialog-edit.component';
 import { LoginComponent } from './Authentification/login/login.component';
 import { SignupComponent } from './Authentification/signup/signup.component';
 import { InputComponent } from './components/input/input.component';
@@ -51,6 +50,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
+
 import {
   CdkMenuItemRadio,
   CdkMenuItemCheckbox,
@@ -61,12 +61,25 @@ import {
   CdkMenuBar,
 } from '@angular/cdk/menu';
 import { CustomersService } from './services/Customers.service';
-import { DialogCategoryComponent } from './DashboardPage/dialog-category/dialog-category.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { SortingDataAccessorService } from './services/sorting-data-accessor.service';
+import { AuthInterceptor, httpInterceptorProviders } from './Authentification/helper/auth.interceptor';
+import { Router } from '@angular/router';
+import { TokenStorageService } from './services/token-storage.service';
+import { EventBusService } from './Authentification/shared/event-bus.service';
+import { Table2Component } from './components/table2/table2.component';
+import { ApiService } from './services/apiService';
+import { MatMenuModule} from '@angular/material/menu';
+import { DateFormatPipe } from './components/table2/date-format.pipe';
+import { DialogComponent } from './components/dialog/dialog.component';
+
+
+
+
 
 @NgModule({
   declarations: [
+    DateFormatPipe,
     AppComponent,
     BodyComponent,
     SidenavComponent,
@@ -81,14 +94,14 @@ import { SortingDataAccessorService } from './services/sorting-data-accessor.ser
     LoginComponent,
     DashboardPageComponent,
     SignupComponent,
-    DialogEditComponent,
     ProductsComponent,
     InputComponent,
     ButtonComponent,
     TableComponent,
     DataPropertyGetterPipe,
     UsersComponent,
-    DialogCategoryComponent,
+    Table2Component,
+    DialogComponent
   ],
   
   imports: [
@@ -108,6 +121,7 @@ import { SortingDataAccessorService } from './services/sorting-data-accessor.ser
     MatTableModule,
     HttpClientModule,
     MatIconModule,
+    MatMenuModule,
     MatButtonModule,
     FormsModule,
     MatInputModule,
@@ -125,13 +139,18 @@ import { SortingDataAccessorService } from './services/sorting-data-accessor.ser
     MatPaginatorModule,
     MatProgressSpinnerModule,
     
+    
   ],
-
+  
   providers: [AuthValidatorsService,
               AuthGuardService,
               AuthGuard2Service,
               CustomersService,
-              SortingDataAccessorService],
+              SortingDataAccessorService,
+              httpInterceptorProviders,
+              TokenStorageService,
+              ApiService,
+              DatePipe],
   bootstrap: [AppComponent]
 })
 

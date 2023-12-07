@@ -1,0 +1,78 @@
+<div *ngIf="isEmpty ; else noData">
+<table  
+    mat-table 
+    matSort 
+    color="primary" 
+    matSortActive="{{sortActive}}"
+    matSortDirection="asc"
+    [dataSource]="dataSource" 
+    style="min-width: 100%;" 
+    (matSortChange)="announceSortChange($event)">
+  
+  <ng-container *ngFor="let tableColumn of displayedColumns" [matColumnDef]="tableColumn">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+       {{tableColumn}}
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!(tableColumn === 'action'); else otherData">
+        <ng-container *ngIf="isImageTextColumn(tableColumn)">
+          
+            <img mat-card-avatar alt="" [src]="element.imageUrl" style="margin-bottom: 0 !important; width: 48px; height: 48px; border-radius: 10px;margin-top: 7px;margin-bottom: 7px;">
+            <!-- <mat-card-title style="padding-left:15px !important;">{{ getValueForColumn(element, tableColumn) }} </mat-card-title> -->
+          
+        </ng-container>  
+        
+          {{ getValueForColumn(element, tableColumn) }}
+        
+      </ng-container>
+      <ng-template  #otherData>
+        <ng-container *ngIf="tableColumn === 'action'" >
+          <button mat-icon-button color="primary" [matMenuTriggerFor]="appMenu" [matMenuTriggerData]="{element: element}">
+            <mat-icon>{{Button}}</mat-icon>
+          </button>
+        </ng-container>
+      </ng-template>
+       
+      </td>
+  </ng-container>
+
+      <tr mat-header-row style="background-color: #f7faff;font-weight: 600;" *matHeaderRowDef="displayedColumns"  ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter {{this.filterValue}} </td>
+      </tr>
+</table>
+      <mat-paginator 
+                [length]="categNum"
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+                >
+      </mat-paginator>
+</div>
+<ng-template #noData> 
+  <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+    <img src="../../../assets/icons/empty.svg" style="width: 250px;" alt="Logo">
+    <h2>No Products Founds </h2>
+    <h3>Create Products from here</h3>
+  </div>
+</ng-template>
+
+
+
+<mat-menu #appMenu="matMenu">
+  <ng-template matMenuContent let-element="element">
+    <button mat-menu-item *ngFor="let Item of Items">
+      <ng-container [ngSwitch]="Item">
+        <span *ngSwitchCase="'Edit'" (click)="openDialogEdit(element)">
+          {{Item}}
+        </span>
+        <span *ngSwitchCase="'Delete'" (click)="deleteData(element)">
+          {{Item}}
+        </span>
+        </ng-container>
+    </button>
+  </ng-template>
+</mat-menu>
+
+
+

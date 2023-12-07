@@ -19,7 +19,7 @@ export class InputComponent {
   onKeyUp(event: KeyboardEvent) {
     this.keyUpEvent.emit(event);
   }
-
+  
 
   myElement = document.getElementById("");
 

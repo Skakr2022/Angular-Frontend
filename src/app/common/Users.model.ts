@@ -8,4 +8,5 @@ export interface Users {
     Email:string;
     role:Role;
     Password:string;
+    action:string;
 }

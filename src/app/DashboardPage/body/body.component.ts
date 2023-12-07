@@ -15,11 +15,11 @@ export class BodyComponent {
     let styleClass='';
     
     if(this.collapsed && this.ScreenWidth>=768){
-   
+      
       styleClass='body-trimmed';
     }
     else if(this.collapsed && this.ScreenWidth<=768 && this.ScreenWidth >0){
-     
+      
       styleClass='body-md-screen';
     }
     return styleClass;

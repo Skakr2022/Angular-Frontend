@@ -17,7 +17,7 @@ export class CategoryService {
      return this.http.get<ProductCategory>(this.CategoriesURL);
    }
    
-   postCategories(formData:FormData):Observable<object>{
+   postCategories(formData:FormData):Observable<any>{
       return this.http.post(this.CategoriesURL,formData,{ 
          responseType:'arraybuffer'
       } );
@@ -27,7 +27,6 @@ export class CategoryService {
       return this.http.put(`${this.CategoriesURL}/${id}`,formData);
    }
   
-
    deleteCategoryById(id:number):Observable<any>{
      return this.http.delete(`${this.CategoriesURL}/${id}`);
    }
