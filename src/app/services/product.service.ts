@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Product } from 'src/app/common/Product';
 import { ProductCategory } from '../common/ProductCategory';
 
@@ -15,11 +15,11 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<any> {
-    return this.http.get<Product[]>(this.productUrl).pipe();
+    return this.http.get<Product[]>(`http://localhost:8080/product`)
   }
 
   createStudent(formData:FormData): Observable<object> {  
-    return this.http.post(`${this.productUrl}`+'/new', formData,{
+    return this.http.post(`${this.productUrl}`, formData,{
       responseType:'arraybuffer'
     } );  
   }  
@@ -44,6 +44,22 @@ export class ProductService {
     return this.http.get(`${this.productUrl}`+'/img/'+`${id}`,{responseType:'arraybuffer'})
   }
 
+  findProduct(
+    pageNumber:number,
+    pageSize:number,
+    sortField:string,
+    sortOrder:string
+    ):Observable<any>{
+    return this.http.get(`http://localhost:8080/product/paginate`,
+      { params:new HttpParams()
+       .set('page',pageNumber.toString()) 
+       .set('size',pageSize.toString())
+       .set('sortField',sortField)
+       .set('sortOrder',sortOrder)
+      }).pipe( 
+       map(res=> res) 
+      );
+    }
 
 
 }

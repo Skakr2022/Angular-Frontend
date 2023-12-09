@@ -62,6 +62,7 @@ export class SignupComponent implements OnInit {
 
     this.authService.register(formData).subscribe({
       next: (val: any) => {
+        console.log("test")
         this._coreService.openSnackBar('Product successfully added!');
         this.router.navigate(['/login'])  
       },

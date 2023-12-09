@@ -30,7 +30,7 @@
                   *ngIf="isCorrect " 
                   class="help-block" style="color: red;">email or password is incorrect</p>
                 </div>
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit1()" #f="ngForm">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" #f="ngForm">
                     <div class="mb-4">
                       <label for="exampleInputEmail1" class="form-label">Email</label>
                       <input 

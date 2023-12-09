@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit{
   }
   
 
-  onSubmit1(){
+  onSubmit(){
 
     const formData = new FormData();
     formData.append("username",this.loginForm.value.username)

@@ -1,8 +1,14 @@
 
 <div class="x">
     <label *ngIf="label" class="edit-label">{{label}}</label>
-    <mat-form-field id="search" appearance="outline" >
-        <input matInput  type="text" (keyup)="onKeyUp($event)"  placeholder={{placeHolder}}>
+    <mat-form-field id="search" appearance="outline">
+        <input (focus)="hidePlaceholder()" 
+               (blur)="showPlaceholder()" 
+               class="searchBox" 
+               matInput  
+               type="text" 
+               (keyup)="onKeyUp($event)" 
+               placeholder="{{placeHolder}}">
         <mat-icon color="primary" matIconPrefix> {{icon}} </mat-icon>
     </mat-form-field>
 </div>

@@ -54,8 +54,19 @@
     ::ng-deep .mat-mdc-form-field-icon-prefix>.mat-icon{
         padding-top: 0 !important;
     }
-
     
 }
+
+.searchBox::placeholder {
+    color: gray;  
+    font-size: 15px !important; 
+    opacity: 1;    
+    transition: opacity 0.5s !important;
+
+}
+.searchBox.hide-placeholder::placeholder {
+    opacity: 0;
+}
+
 
 

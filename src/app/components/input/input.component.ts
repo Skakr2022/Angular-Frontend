@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class InputComponent {
 
   @Input() heights!: string;
-  @Input() label? : string;
+  @Input() label! : string;
 
   @Input()
   placeHolder: string = 'Search here..';
@@ -19,10 +19,19 @@ export class InputComponent {
   onKeyUp(event: KeyboardEvent) {
     this.keyUpEvent.emit(event);
   }
-
+  
 
   myElement = document.getElementById("");
 
+  hidePlaceholder() {
+    const searchInput = document.querySelector('.searchBox') as HTMLInputElement;
+      searchInput.classList.add('hide-placeholder');
+  }
+
+  showPlaceholder() {
+    const searchInput = document.querySelector('.searchBox') as HTMLInputElement;
+    searchInput.classList.remove('hide-placeholder');
+  }
 
 
 }

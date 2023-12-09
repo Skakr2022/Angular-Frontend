@@ -2,6 +2,7 @@
     position: relative;
     border: none;
 }
+
 .image{
     width: 48px;
     margin-right: 12px;
@@ -39,7 +40,7 @@
 }
 
 .mat-mdc-card{
-    border-radius: 10px ;
+    border-radius: 10px !important;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px !important;  
     display: block!important;
     border: none!important;

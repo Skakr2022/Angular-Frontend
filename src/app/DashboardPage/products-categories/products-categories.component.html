@@ -1,0 +1,34 @@
+<mat-card>
+
+    <mat-card-header>
+        
+    <mat-card-title>Categories products</mat-card-title>
+      <div style="align-items: center;display: flex;flex-wrap: wrap;" >
+        <app-input icon="search" placeHolder="search here...." (keyUpEvent)="applyFilter($event)"  #test > </app-input>
+        <app-button 
+        text="Create New" 
+        (btnClick)="openDialogCreate()" 
+        color="primary" 
+        prefixIcon="add">
+        </app-button>
+      </div>
+    </mat-card-header>
+  
+    <mat-card-content  class="mat-card-content">
+       <app-table2
+                [hasAction]="hasAction"
+                [filterValue]="filterValue"
+                idField="categoryId"
+                [Dialog]="dialog"
+                [dialogData]="dialogCategory"
+                [Items]="dropdownItems"
+                [sortActive]="sortActive"
+                [endpoint]="category" 
+                [dataSource]="CatDataSource" 
+                [displayedColumns]="CatDisplayedColumns">
+          </app-table2>
+    </mat-card-content>
+ 
+  </mat-card>
+  
+

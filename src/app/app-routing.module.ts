@@ -8,10 +8,10 @@ import { DashboardPageComponent } from './DashboardPage/DashboardPage.component'
 import { SignupComponent } from './Authentification/signup/signup.component';
 import { DashboardComponent } from './DashboardPage/dashboard/dashboard.component';
 import { ProductsComponent } from './DashboardPage/products/products.component';
-import { StatisticsComponent } from './DashboardPage/statistics/statistics.component';
+import { ProductsCategoriesComponent } from './DashboardPage/products-categories/products-categories.component';
 import { CoupensComponent } from './DashboardPage/coupens/coupens.component';
 import { MediaComponent } from './DashboardPage/media/media.component';
-import { PagesComponent } from './DashboardPage/pages/pages.component';
+import { UsersComponent } from './DashboardPage/users/users.component';
 import { authGuardGuard, loginGuard } from './services/auth-guard.guard';
 
 
@@ -22,8 +22,8 @@ const routes: Routes = [
      {path:'',redirectTo:'dashboard',pathMatch:'full'},
      {path:'dashboard',component:DashboardComponent },
      {path:'products',component:ProductsComponent},
-     {path:'statistics',component:StatisticsComponent },
-     {path:'pages',component:PagesComponent},
+     {path:'statistics',component:ProductsCategoriesComponent },
+     {path:'pages',component:UsersComponent},
      {path:'coupens',component:CoupensComponent},
      {path:'media',component:MediaComponent},
      {path:'settings',component:SettingsComponent},

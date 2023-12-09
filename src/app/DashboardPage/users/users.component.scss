@@ -1,3 +1,4 @@
+
 .mat-mdc-header-cell {
     position: relative;
     border: none;
@@ -62,3 +63,43 @@
     padding: 0;
 }
 
+
+.overlay-language {
+    margin-top:-10px ;
+    padding: 0.5rem 0;
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+}
+
+.overlay-language ul {
+   list-style: none;
+   width: 8rem;
+}
+
+.overlay-language ul li {
+    display: flex;
+    padding: 0.35rem 0.8rem;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.overlay-language ul li:hover {
+    background-color: #f3f3f9;
+    transition: all 0.3s ease-in-out;
+}
+
+.overlay-fall {
+    animation: fall 300ms ease-in-out forwards;
+    transform-origin:top;
+}
+
+@keyframes fall {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}

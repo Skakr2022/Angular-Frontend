@@ -47,12 +47,5 @@ export class SidenavComponent implements OnInit {
     this.onToggleSideNav.emit({collapsed: this.collapsed,screenWidth:this.screenWidth});
   }
 
-  // onMouseOver() {
-  //   this.collapsed=true;
-  // }
-  // onMouseOut(){
-  //   this.collapsed=false;  
-  // }
-
 }
 

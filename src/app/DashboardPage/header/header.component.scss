@@ -1,12 +1,14 @@
 .header {
    width:calc(100% - 5rem);
    margin-left: 5rem;
-   
+ 
    position: fixed;
    z-index: 1;
    padding: 0rem 1.5rem 0rem 1rem;
    top:0;
    transition: all 0.5s ease;
+   
+
 }
 .head-content {
     background: #fff; 
@@ -16,6 +18,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
+
 }
 .search-container {
     position:relative;

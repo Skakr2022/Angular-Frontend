@@ -21,6 +21,11 @@
       {
         "label": "off"
       }
-    ]
+    ],
+    "no-inline-styles": "off",
+    "axe/text-alternatives": "off",
+    "button-type": "off",
+    "compat-api/css": "off",
+    "axe/aria": "off"
   }
 }

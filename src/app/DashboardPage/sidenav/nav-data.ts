@@ -17,7 +17,7 @@ export const navbarData =[
     {
         routerLink: 'pages',
         icon: 'fal fa-file',
-        label: 'Pages'
+        label: 'Users'
     },
     {
         routerLink: 'coupens',

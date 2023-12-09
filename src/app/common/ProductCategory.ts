@@ -1,9 +1,11 @@
 import { Product } from "./Product";
-
-export class ProductCategory {
-    constructor(
-        public id:number,
-        public categoryName:string
-        )
-        {  }
+   
+export interface ProductCategory {
+   
+        categoryId:number;
+        categoryName:string;
+         creation_date:Date;
+         product:Product;
+        
   }
+   

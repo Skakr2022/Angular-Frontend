@@ -4,3 +4,4 @@ export interface TableColumn {
     position?: 'right' | 'left';
     isSortable?: boolean;
   }
+  
